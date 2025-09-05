@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Cantine di Oddo - Ristorante Storico Assisi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #2c1810;
+            background-color: #faf7f2;
+            width: 100vw;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.95), rgba(160, 82, 45, 0.95));
+            color: #f5f5dc;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100vw;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f5f5dc;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #f5f5dc;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #daa520;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: #daa520;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            width: 100vw;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(139, 69, 19, 0.3)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="stonework" patternUnits="userSpaceOnUse" width="100" height="100"><rect width="100" height="100" fill="%23d2b48c"/><rect x="10" y="10" width="35" height="20" fill="%23bc9a6a" opacity="0.7"/><rect x="55" y="15" width="30" height="18" fill="%23a0522d" opacity="0.6"/><rect x="15" y="40" width="40" height="25" fill="%23daa520" opacity="0.5"/><rect x="65" y="45" width="25" height="15" fill="%23cd853f" opacity="0.8"/></pattern></defs><rect width="1200" height="800" fill="url(%23stonework)"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+            font-family: 'Georgia', serif;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            font-style: italic;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #daa520, #b8860b);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(218, 165, 32, 0.4);
+            background: linear-gradient(135deg, #b8860b, #daa520);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+            width: 100vw;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            color: #8b4513;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #daa520, #b8860b);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* Storia Section */
+        .storia {
+            background: linear-gradient(135deg, #f5f5dc 0%, #faf7f2 100%);
+            padding: 6rem 0;
+            width: 100vw;
+        }
+
+        .storia-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .storia-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #5d4e37;
+        }
+
+        .storia-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .building-showcase {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(160, 82, 45, 0.05));
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.1);
+        }
+
+        .building-icon {
+            font-size: 4rem;
+            color: #8b4513;
+            margin-bottom: 1rem;
+        }
+
+        /* Menu Preview */
+        .menu-preview {
+            padding: 6rem 0;
+            background: #fff;
+            width: 100vw;
+        }
+
+        .piatti-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            padding: 0 2rem;
+        }
+
+        .piatto-card {
+            background: linear-gradient(135deg, #faf7f2, #f5f5dc);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+        }
+
+        .piatto-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(139, 69, 19, 0.2);
+            border-color: #daa520;
+        }
+
+        .piatto-icon {
+            font-size: 3rem;
+            color: #8b4513;
+            margin-bottom: 1rem;
+        }
+
+        .piatto-card h3 {
+            color: #8b4513;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .piatto-card p {
+            color: #5d4e37;
+            font-style: italic;
+        }
+
+        /* Contatti */
+        .contatti {
+            background: linear-gradient(135deg, #8b4513, #a0522d);
+            color: #f5f5dc;
+            padding: 6rem 0;
+            width: 100vw;
+        }
+
+        .contatti h2 {
+            color: #f5f5dc;
+        }
+
+        .contatti-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            padding: 0 2rem;
+        }
+
+        .contatto-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contatto-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #daa520;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c1810;
+            color: #f5f5dc;
+            text-align: center;
+            padding: 2rem;
+            width: 100vw;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .storia-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Scroll effects */
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background: linear-gradient(45deg, rgba(139, 69, 19, 0.1), rgba(218, 165, 32, 0.05));
+            z-index: -1;
+            transform: translateY(0);
+            transition: transform 0.3s ease-out;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">Le Cantine di Oddo</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#storia">La Nostra Storia</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#contatti">Contatti</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="parallax-bg"></div>
+        <div class="hero-content">
+            <h1>Le Cantine di Oddo</h1>
+            <p>Tradizione culinaria nel cuore storico di Assisi</p>
+            <a href="#menu" class="cta-button">Scopri i Nostri Piatti</a>
+        </div>
+    </section>
+
+    <section id="storia" class="storia">
+        <div class="storia-content">
+            <div class="storia-text fade-in">
+                <h2 style="text-align: left; margin-bottom: 2rem;">La Nostra Storia</h2>
+                <p>Nel cuore medievale di Assisi, tra vicoli lastricati di pietra rosa del Subasio, sorge "Le Cantine di
+                    Oddo", un ristorante che racconta secoli di storia attraverso le sue antiche mura.</p>
+                <p>Il nostro edificio storico, con le sue caratteristiche volte in pietra e i mattoni a vista, è stato
+                    testimone del passare del tempo, custodendo tradizioni culinarie che si tramandano di generazione in
+                    generazione.</p>
+                <p>Ogni pietra della nostra struttura narra una storia, ogni ambiente respira l'atmosfera autentica
+                    dell'Umbria più vera, dove il tempo sembra essersi fermato per permettere ai sapori di maturare
+                    nella loro essenza più pura.</p>
+            </div>
+            <div class="building-showcase fade-in">
+                <div class="building-icon">🏛️</div>
+                <h3 style="color: #8b4513; margin-bottom: 1rem;">Architettura Storica</h3>
+                <p style="color: #5d4e37;">Un edificio medievale restaurato con cura, dove ogni dettaglio architettonico
+                    racconta la storia millenaria di Assisi</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="menu-preview">
+        <h2>I Nostri Piatti Tradizionali</h2>
+        <div class="piatti-grid">
+            <div class="piatto-card fade-in">
+                <div class="piatto-icon">🍝</div>
+                <h3>Primi Piatti Umbri</h3>
+                <p>Pici al tartufo, strangozzi al ragu di cinghiale, risotto al sagrantino - la tradizione umbra in ogni
+                    boccone</p>
+            </div>
+            <div class="piatto-card fade-in">
+                <div class="piatto-icon">🥩</div>
+                <h3>Carni alla Griglia</h3>
+                <p>Bistecca di Chianina, agnello alle erbe, salsicce di Norcia - sapori autentici della nostra terra</p>
+            </div>
+            <div class="piatto-card fade-in">
+                <div class="piatto-icon">🧀</div>
+                <h3>Formaggi e Salumi</h3>
+                <p>Pecorino di Norcia, lonza, capocollo - un viaggio nei sapori tipici dell'Umbria</p>
+            </div>
+            <div class="piatto-card fade-in">
+                <div class="piatto-icon">🍷</div>
+                <h3>Cantina Selezionata</h3>
+                <p>Sagrantino, Trebbiano, Grechetto - i migliori vini umbri per accompagnare ogni piatto</p>
+            </div>
+            <div class="piatto-card fade-in">
+                <div class="piatto-icon">🍯</div>
+                <h3>Dolci della Tradizione</h3>
+                <p>Torta al testo dolce, rocciata di Assisi, pinoccate - per concludere in dolcezza</p>
+            </div>
+            <div class="piatto-card fade-in">
+                <div class="piatto-icon">🫒</div>
+                <h3>Olio Extra Vergine</h3>
+                <p>Olio novello delle colline assisane, per esaltare ogni sapore con genuinità</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contatti" class="contatti">
+        <h2>Contatti e Informazioni</h2>
+        <div class="contatti-info">
+            <div class="contatto-item fade-in">
+                <div class="contatto-icon">📍</div>
+                <h3>Dove Siamo</h3>
+                <p>Centro Storico di Assisi<br>Provincia di Perugia, Umbria</p>
+            </div>
+            <div class="contatto-item fade-in">
+                <div class="contatto-icon">🕐</div>
+                <h3>Orari di Apertura</h3>
+                <p>Pranzo: 12:00 - 15:00<br>Cena: 19:00 - 23:00<br>Chiuso il mercoledì</p>
+            </div>
+            <div class="contatto-item fade-in">
+                <div class="contatto-icon">📱</div>
+                <h3>Prenotazioni</h3>
+                <p>Telefono: [Numero da inserire]<br>Email: info@cantinedioddo.it<br>Consigliata la prenotazione</p>
+            </div>
+            <div class="contatto-item fade-in">
+                <div class="contatto-icon">🗺️</div>
+                <h3>Google Maps</h3>
+                <p>Cercaci su Google Maps:<br>"Le Cantine di Oddo"<br>per raggiungerci facilmente</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Le Cantine di Oddo - Assisi. Tutti i diritti riservati.</p>
+        <p>Tradizione, storia e sapori nel cuore dell'Umbria</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling per i link di navigazione
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'linear-gradient(135deg, rgba(139, 69, 19, 0.98), rgba(160, 82, 45, 0.98))';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.3)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, rgba(139, 69, 19, 0.95), rgba(160, 82, 45, 0.95))';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Parallax effect per l'hero
+        window.addEventListener('scroll', () => {
+            const parallaxBg = document.querySelector('.parallax-bg');
+            if (parallaxBg) {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.3;
+                parallaxBg.style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        // Fade in animation al scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Applica l'animazione agli elementi fade-in
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Hover effect sulle card dei piatti
+        document.querySelectorAll('.piatto-card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.background = 'linear-gradient(135deg, #f5f5dc, #daa520)';
+                this.querySelector('.piatto-icon').style.transform = 'scale(1.2) rotate(5deg)';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.background = 'linear-gradient(135deg, #faf7f2, #f5f5dc)';
+                this.querySelector('.piatto-icon').style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+    </script>
+</body>
+
+</html>
